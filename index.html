@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eva — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+
+  /* ── Reset & Variables ── */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --cream:    #f7f4ef;
+    --ink:      #1a1714;
+    --muted:    #7a7068;
+    --accent:   #c08b5c;
+    --line:     #e0dbd3;
+    --soft:     #ede9e3;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 300;
+    line-height: 1.75;
+    overflow-x: hidden;
+  }
+
+  /* ── Grain Overlay ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.6;
+  }
+
+  /* ── Typography Scale ── */
+  h1, h2, h3 { font-weight: 300; letter-spacing: -0.01em; }
+  em { font-style: italic; }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ── Page Fade-In ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    animation: fadeUp 0.9s cubic-bezier(0.22, 0.8, 0.32, 1) forwards;
+  }
+
+  /* ── Navigation ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.6rem 4rem;
+    background: rgba(247, 244, 239, 0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+    z-index: 100;
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2.5rem;
+  }
+
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    transition: color 0.25s;
+  }
+
+  .nav-links a:hover { color: var(--ink); }
+
+  /* ── Hero ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6rem 4rem 6rem 5rem;
+    animation: fadeUp 0.9s 0.1s cubic-bezier(0.22, 0.8, 0.32, 1) both;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.6rem;
+  }
+
+  .hero-name {
+    font-size: clamp(2.8rem, 5vw, 4.4rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 0.4rem;
+  }
+
+  .hero-name em {
+    display: block;
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-subtitle {
+    font-size: 1.25rem;
+    color: var(--muted);
+    margin-top: 1.4rem;
+    font-weight: 300;
+    line-height: 1.65;
+    max-width: 38ch;
+  }
+
+  .hero-cta {
+    margin-top: 3rem;
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    padding: 0.85rem 2.2rem;
+    background: var(--ink);
+    color: var(--cream);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transition: background 0.25s, transform 0.2s;
+  }
+
+  .btn-primary:hover {
+    background: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .btn-ghost {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 2px;
+    transition: color 0.25s, border-color 0.25s;
+  }
+
+  .btn-ghost:hover { color: var(--ink); border-color: var(--ink); }
+
+  .hero-right {
+    position: relative;
+    background: var(--soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    animation: fadeUp 0.9s 0.25s cubic-bezier(0.22, 0.8, 0.32, 1) both;
+  }
+
+  /* Decorative geometric art instead of photo */
+  .hero-art {
+    width: 340px;
+    height: 340px;
+    position: relative;
+  }
+
+  .art-circle-outer {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    animation: spin 30s linear infinite;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  .art-circle-mid {
+    position: absolute;
+    inset: 30px;
+    border-radius: 50%;
+    border: 1px solid var(--accent);
+    opacity: 0.35;
+    animation: spin 18s linear infinite reverse;
+  }
+
+  .art-monogram {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 7rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink);
+    opacity: 0.12;
+    user-select: none;
+  }
+
+  .art-dots {
+    position: absolute;
+    inset: 60px;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 50% 0%, var(--accent) 2px, transparent 2px),
+      radial-gradient(circle at 93% 25%, var(--accent) 2px, transparent 2px),
+      radial-gradient(circle at 93% 75%, var(--accent) 2px, transparent 2px),
+      radial-gradient(circle at 50% 100%, var(--accent) 2px, transparent 2px),
+      radial-gradient(circle at 7% 75%, var(--accent) 2px, transparent 2px),
+      radial-gradient(circle at 7% 25%, var(--accent) 2px, transparent 2px);
+    opacity: 0.5;
+  }
+
+  .art-label {
+    position: absolute;
+    bottom: 2.5rem;
+    right: 2.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+
+  /* ── Section Base ── */
+  section {
+    padding: 7rem 5rem;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 300;
+    line-height: 1.15;
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+    margin-left: 1rem;
+    align-self: center;
+  }
+
+  /* ── About ── */
+  #about { background: var(--soft); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    font-size: 1.15rem;
+    color: var(--muted);
+    margin-bottom: 1.4rem;
+    line-height: 1.85;
+  }
+
+  .about-text p strong {
+    color: var(--ink);
+    font-weight: 400;
+  }
+
+  .about-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.95rem;
+  }
+
+  .detail-row:first-child { border-top: 1px solid var(--line); }
+
+  .detail-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .detail-value { color: var(--ink); }
+
+  /* ── Skills ── */
+  #skills { background: var(--cream); }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .skill-card {
+    background: var(--soft);
+    padding: 2.5rem 2rem;
+    transition: background 0.25s, transform 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skill-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 0;
+    background: var(--accent);
+    transition: height 0.35s cubic-bezier(0.22, 0.8, 0.32, 1);
+  }
+
+  .skill-card:hover::before { height: 100%; }
+  .skill-card:hover { background: #eae5de; transform: translateY(-3px); }
+
+  .skill-icon {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  .skill-name {
+    font-size: 1.35rem;
+    font-weight: 400;
+    margin-bottom: 0.6rem;
+  }
+
+  .skill-items {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    line-height: 2;
+    letter-spacing: 0.04em;
+  }
+
+  /* ── Projects ── */
+  #projects { background: var(--ink); color: var(--cream); }
+
+  #projects .section-title { color: var(--cream); }
+  #projects .section-num  { color: var(--accent); }
+  #projects .section-line { background: rgba(255,255,255,0.1); }
+
+  .projects-list { display: flex; flex-direction: column; gap: 0; }
+
+  .project-item {
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr;
+    align-items: center;
+    padding: 2rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    transition: padding-left 0.3s;
+    cursor: default;
+  }
+
+  .project-item:first-child { border-top: 1px solid rgba(255,255,255,0.08); }
+
+  .project-item:hover { padding-left: 1.2rem; }
+
+  .project-name {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--cream);
+  }
+
+  .project-name em { color: var(--accent); }
+
+  .project-desc {
+    font-size: 0.85rem;
+    color: rgba(247,244,239,0.45);
+    margin-top: 0.3rem;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.02em;
+  }
+
+  .project-tech {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-align: center;
+  }
+
+  .project-year {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: rgba(247,244,239,0.3);
+    text-align: right;
+    letter-spacing: 0.1em;
+  }
+
+  /* ── Education ── */
+  #education { background: var(--soft); }
+
+  .edu-entry {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 3rem;
+    padding: 2.8rem 0;
+    border-bottom: 1px solid var(--line);
+    align-items: start;
+  }
+
+  .edu-entry:first-of-type { border-top: 1px solid var(--line); }
+
+  .edu-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding-top: 0.3rem;
+  }
+
+  .edu-degree {
+    font-size: 1.45rem;
+    font-weight: 300;
+    margin-bottom: 0.4rem;
+  }
+
+  .edu-school {
+    font-size: 0.95rem;
+    color: var(--muted);
+    margin-bottom: 0.8rem;
+  }
+
+  .edu-note {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    line-height: 1.9;
+  }
+
+  /* ── Contact ── */
+  #contact { background: var(--cream); }
+
+  .contact-inner {
+    max-width: 640px;
+  }
+
+  .contact-intro {
+    font-size: 1.35rem;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 3.5rem;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .contact-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.3rem 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    font-size: 1.1rem;
+    transition: padding-left 0.3s, color 0.25s;
+  }
+
+  .contact-link:first-child { border-top: 1px solid var(--line); }
+
+  .contact-link:hover {
+    padding-left: 0.8rem;
+    color: var(--accent);
+  }
+
+  .contact-link-arrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--muted);
+    transition: transform 0.3s;
+  }
+
+  .contact-link:hover .contact-link-arrow {
+    transform: translateX(6px);
+    color: var(--accent);
+  }
+
+  /* ── Footer ── */
+  footer {
+    background: var(--ink);
+    color: rgba(247,244,239,0.35);
+    padding: 2rem 5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  /* ── Scroll-triggered reveal ── */
+  .js-reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.8s cubic-bezier(0.22, 0.8, 0.32, 1),
+                transform 0.8s cubic-bezier(0.22, 0.8, 0.32, 1);
+  }
+
+  .js-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    nav { padding: 1.4rem 2rem; }
+    .nav-links { gap: 1.5rem; }
+
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 8rem 2rem 4rem; }
+    .hero-right { min-height: 300px; }
+
+    section { padding: 5rem 2rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .project-item { grid-template-columns: 1fr; gap: 0.6rem; }
+    .project-year { text-align: left; }
+    .project-tech { text-align: left; }
+    .edu-entry { grid-template-columns: 1fr; gap: 0.5rem; }
+    footer { flex-direction: column; gap: 0.8rem; text-align: center; }
+  }
+
+  @media (max-width: 560px) {
+    .skills-grid { grid-template-columns: 1fr; }
+    .hero-name { font-size: 2.4rem; }
+  }
+
+</style>
+</head>
+<body>
+
+<!-- ── Navigation ── -->
+<nav>
+  <span class="nav-logo">Eva</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ── Hero ── -->
+<header class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">CSE Student &amp; Developer</p>
+    <h1 class="hero-name">
+      Mosammat Samiea<br>
+      Jahan <em>Eva</em>
+    </h1>
+    <p class="hero-subtitle">
+      A Computer Science &amp; Engineering student at Daffodil International University — 
+      crafting thoughtful software and exploring the intersection of logic &amp; elegance.
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn-primary">View Work</a>
+      <a href="#contact" class="btn-ghost">Get in Touch →</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-art">
+      <div class="art-circle-outer"></div>
+      <div class="art-circle-mid"></div>
+      <div class="art-dots"></div>
+      <div class="art-monogram">E</div>
+    </div>
+    <span class="art-label">Dhaka, Bangladesh</span>
+  </div>
+</header>
+
+<!-- ── About ── -->
+<section id="about">
+  <div class="section-header js-reveal">
+    <span class="section-num">01 —</span>
+    <h2 class="section-title">About</h2>
+    <span class="section-line"></span>
+  </div>
+
+  <div class="about-grid">
+    <div class="about-text js-reveal">
+      <p>
+        I'm <strong>Eva</strong>, a dedicated CSE student with a deep curiosity for how technology 
+        shapes the world around us. I enjoy building things that are both <em>functional and 
+        beautiful</em> — from web applications to algorithmic solutions.
+      </p>
+      <p>
+        My journey in computer science has sharpened my analytical thinking and 
+        nurtured a love for <strong>clean code</strong>, collaborative problem-solving, 
+        and continuous learning.
+      </p>
+      <p>
+        When I'm not writing code, you'll find me exploring new programming paradigms, 
+        reading about emerging technologies, or working on creative side projects 
+        that blend <em>art with engineering</em>.
+      </p>
+    </div>
+
+    <div class="about-details js-reveal">
+      <div class="detail-row">
+        <span class="detail-label">Full Name</span>
+        <span class="detail-value">Mosammat Samiea Jahan Eva</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">University</span>
+        <span class="detail-value">Daffodil International University</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Department</span>
+        <span class="detail-value">Computer Science &amp; Engineering</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Location</span>
+        <span class="detail-value">Dhaka, Bangladesh</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Available for</span>
+        <span class="detail-value">Internship &amp; Collaboration</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Status</span>
+        <span class="detail-value">Open to Opportunities</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Skills ── -->
+<section id="skills">
+  <div class="section-header js-reveal">
+    <span class="section-num">02 —</span>
+    <h2 class="section-title">Skills</h2>
+    <span class="section-line"></span>
+  </div>
+
+  <div class="skills-grid">
+
+    <div class="skill-card js-reveal">
+      <p class="skill-icon">01 / Languages</p>
+      <h3 class="skill-name">Programming</h3>
+      <p class="skill-items">Python<br>Java<br>C / C++<br>JavaScript<br>SQL</p>
+    </div>
+
+    <div class="skill-card js-reveal">
+      <p class="skill-icon">02 / Frontend</p>
+      <h3 class="skill-name">Web Design</h3>
+      <p class="skill-items">HTML5<br>CSS3<br>JavaScript<br>Responsive Design<br>UI Principles</p>
+    </div>
+
+    <div class="skill-card js-reveal">
+      <p class="skill-icon">03 / Backend</p>
+      <h3 class="skill-name">Development</h3>
+      <p class="skill-items">Node.js<br>REST APIs<br>MySQL<br>MongoDB<br>Firebase</p>
+    </div>
+
+    <div class="skill-card js-reveal">
+      <p class="skill-icon">04 / CS Core</p>
+      <h3 class="skill-name">Fundamentals</h3>
+      <p class="skill-items">Data Structures<br>Algorithms<br>OOP<br>OS Concepts<br>Networking</p>
+    </div>
+
+    <div class="skill-card js-reveal">
+      <p class="skill-icon">05 / Tools</p>
+      <h3 class="skill-name">Workflow</h3>
+      <p class="skill-items">Git &amp; GitHub<br>VS Code<br>Linux<br>Figma<br>Postman</p>
+    </div>
+
+    <div class="skill-card js-reveal">
+      <p class="skill-icon">06 / Soft Skills</p>
+      <h3 class="skill-name">Abilities</h3>
+      <p class="skill-items">Team Collaboration<br>Problem Solving<br>Communication<br>Time Management<br>Adaptability</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── Projects ── -->
+<section id="projects">
+  <div class="section-header js-reveal">
+    <span class="section-num">03 —</span>
+    <h2 class="section-title">Projects</h2>
+    <span class="section-line"></span>
+  </div>
+
+  <div class="projects-list">
+
+    <div class="project-item js-reveal">
+      <div>
+        <h3 class="project-name">Student <em>Management</em> System</h3>
+        <p class="project-desc">Full-stack web application for managing student records, attendance, and grades</p>
+      </div>
+      <span class="project-tech">Python · Django · MySQL</span>
+      <span class="project-year">2024</span>
+    </div>
+
+    <div class="project-item js-reveal">
+      <div>
+        <h3 class="project-name">E-commerce <em>Platform</em></h3>
+        <p class="project-desc">Responsive online store with cart functionality, user auth, and payment integration</p>
+      </div>
+      <span class="project-tech">HTML · CSS · JS · Node</span>
+      <span class="project-year">2024</span>
+    </div>
+
+    <div class="project-item js-reveal">
+      <div>
+        <h3 class="project-name">Library <em>Management</em> App</h3>
+        <p class="project-desc">Desktop application for book borrowing, returns, and member management</p>
+      </div>
+      <span class="project-tech">Java · JavaFX · SQLite</span>
+      <span class="project-year">2023</span>
+    </div>
+
+    <div class="project-item js-reveal">
+      <div>
+        <h3 class="project-name">Algorithm <em>Visualizer</em></h3>
+        <p class="project-desc">Interactive visualization of sorting and pathfinding algorithms in the browser</p>
+      </div>
+      <span class="project-tech">JavaScript · Canvas API</span>
+      <span class="project-year">2023</span>
+    </div>
+
+    <div class="project-item js-reveal">
+      <div>
+        <h3 class="project-name">Weather <em>Dashboard</em></h3>
+        <p class="project-desc">Real-time weather app with location search using OpenWeatherMap API</p>
+      </div>
+      <span class="project-tech">HTML · CSS · Fetch API</span>
+      <span class="project-year">2023</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── Education ── -->
+<section id="education">
+  <div class="section-header js-reveal">
+    <span class="section-num">04 —</span>
+    <h2 class="section-title">Education</h2>
+    <span class="section-line"></span>
+  </div>
+
+  <div class="edu-entry js-reveal">
+    <span class="edu-period">2022 — Present</span>
+    <div>
+      <h3 class="edu-degree">B.Sc. in Computer Science &amp; Engineering</h3>
+      <p class="edu-school">Daffodil International University, Dhaka</p>
+      <p class="edu-note">
+        Coursework: Data Structures &amp; Algorithms · Database Management · Software Engineering<br>
+        Operating Systems · Computer Networks · Artificial Intelligence · Web Technologies
+      </p>
+    </div>
+  </div>
+
+  <div class="edu-entry js-reveal">
+    <span class="edu-period">2019 — 2021</span>
+    <div>
+      <h3 class="edu-degree">Higher Secondary Certificate (HSC)</h3>
+      <p class="edu-school">Science Group — Dhaka Board</p>
+      <p class="edu-note">
+        Major subjects: Physics · Chemistry · Mathematics · Biology
+      </p>
+    </div>
+  </div>
+
+  <div class="edu-entry js-reveal">
+    <span class="edu-period">2017 — 2019</span>
+    <div>
+      <h3 class="edu-degree">Secondary School Certificate (SSC)</h3>
+      <p class="edu-school">Science Group — Dhaka Board</p>
+      <p class="edu-note">
+        Foundation in Mathematics, Sciences &amp; Information Technology
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Contact ── -->
+<section id="contact">
+  <div class="section-header js-reveal">
+    <span class="section-num">05 —</span>
+    <h2 class="section-title">Contact</h2>
+    <span class="section-line"></span>
+  </div>
+
+  <div class="contact-inner">
+    <p class="contact-intro js-reveal">
+      I'm always open to new opportunities, collaborations, or just a good conversation 
+      about technology. Feel free to reach out through any of the channels below.
+    </p>
+
+    <div class="contact-links js-reveal">
+      <a href="mailto:eva@student.diu.edu.bd" class="contact-link">
+        eva@student.diu.edu.bd
+        <span class="contact-link-arrow">→</span>
+      </a>
+      <a href="https://linkedin.com/in/samiea-jahan-eva" target="_blank" class="contact-link">
+        LinkedIn — Samiea Jahan Eva
+        <span class="contact-link-arrow">→</span>
+      </a>
+      <a href="https://github.com/samieaeva" target="_blank" class="contact-link">
+        GitHub — @samieaeva
+        <span class="contact-link-arrow">→</span>
+      </a>
+      <a href="#" class="contact-link">
+        Download CV
+        <span class="contact-link-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer>
+  <span>© 2025 Mosammat Samiea Jahan Eva</span>
+  <span>CSE — Daffodil International University</span>
+  <span>Dhaka, Bangladesh</span>
+</footer>
+
+<!-- ── Intersection Observer for scroll reveals ── -->
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.js-reveal').forEach((el, i) => {
+    el.style.transitionDelay = (i % 4) * 0.07 + 's';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>

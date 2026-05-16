@@ -7,7 +7,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
 
-  /* ── to Reset & Variables ── */
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
   :root {
@@ -30,7 +29,6 @@
     overflow-x: hidden;
   }
 
-  /* ── Grain Overlay ── */
   body::before {
     content: '';
     position: fixed; inset: 0;
@@ -40,13 +38,11 @@
     opacity: 0.6;
   }
 
-  /* ── for Typography Scale ── */
   h1, h2, h3 { font-weight: 300; letter-spacing: -0.01em; }
   em { font-style: italic; }
 
   a { color: inherit; text-decoration: none; }
 
-  /* ── to make Page Fade-In ── */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(24px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -57,7 +53,6 @@
     animation: fadeUp 0.9s cubic-bezier(0.22, 0.8, 0.32, 1) forwards;
   }
 
-  /* ── Navigation ── */
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -98,7 +93,6 @@
 
   .nav-links a:hover { color: var(--ink); }
 
-  /* ── Hero ── */
   .hero {
     min-height: 100vh;
     display: grid;
@@ -193,7 +187,6 @@
     animation: fadeUp 0.9s 0.25s cubic-bezier(0.22, 0.8, 0.32, 1) both;
   }
 
-  /* Decorative geometric art instead of photo */
   .hero-art {
     width: 850px;
     height: 850px;
@@ -208,54 +201,10 @@
   border: 3px solid var(--accent);
   box-shadow: 0 10px 40px rgba(0,0,0,0.2);
 }
-  /* .art-circle-outer {
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    border: 1px solid var(--line);
-    animation: spin 30s linear infinite;
-  } */
-
+ 
   @keyframes spin {
     to { transform: rotate(360deg); }
   }
-
-  /* .art-circle-mid {
-    position: absolute;
-    inset: 30px;
-    border-radius: 50%;
-    border: 1px solid var(--accent);
-    opacity: 0.35;
-    animation: spin 18s linear infinite reverse;
-  } */
-
-  /* .art-monogram {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 7rem;
-    font-weight: 300;
-    font-style: italic;
-    color: var(--ink);
-    opacity: 0.12;
-    user-select: none;
-  } */
-
-  /* .art-dots {
-    position: absolute;
-    inset: 60px;
-    border-radius: 50%;
-    background:
-      radial-gradient(circle at 50% 0%, var(--accent) 2px, transparent 2px),
-      radial-gradient(circle at 93% 25%, var(--accent) 2px, transparent 2px),
-      radial-gradient(circle at 93% 75%, var(--accent) 2px, transparent 2px),
-      radial-gradient(circle at 50% 100%, var(--accent) 2px, transparent 2px),
-      radial-gradient(circle at 7% 75%, var(--accent) 2px, transparent 2px),
-      radial-gradient(circle at 7% 25%, var(--accent) 2px, transparent 2px);
-    opacity: 0.5;
-  } */
 
   .art-label {
     position: absolute;
@@ -270,7 +219,6 @@
     text-orientation: mixed;
   }
 
-  /* ── Section Base ── */
   section {
     padding: 7rem 5rem;
   }
@@ -280,14 +228,6 @@
     align-items: baseline;
     gap: 1.5rem;
     margin-bottom: 4rem;
-  }
-
-  .section-num {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    color: var(--accent);
-    letter-spacing: 0.15em;
-    flex-shrink: 0;
   }
 
   .section-title {
@@ -304,7 +244,6 @@
     align-self: center;
   }
 
-  /* ── About ── */
   #about { background: var(--soft); }
 
   .about-grid {
@@ -353,7 +292,6 @@
 
   .detail-value { color: var(--ink); }
 
-  /* ── Skills ── */
   #skills { background: var(--cream); }
 
   .skills-grid {
@@ -406,7 +344,6 @@
     letter-spacing: 0.04em;
   }
 
-  /* ── Projects ── */
   #projects { background: var(--ink); color: var(--cream); }
 
   #projects .section-title { color: var(--cream); }
@@ -462,7 +399,6 @@
     letter-spacing: 0.1em;
   }
 
-  /* ── Education ── */
   #education { background: var(--soft); }
 
   .edu-entry {
@@ -505,7 +441,6 @@
     line-height: 1.9;
   }
 
-  /* ── Contact ── */
   #contact { background: var(--cream); }
 
   .contact-inner {
@@ -555,7 +490,6 @@
     color: var(--accent);
   }
 
-  /* ── Footer ── */
   footer {
     background: var(--ink);
     color: rgba(247,244,239,0.35);
@@ -569,7 +503,6 @@
     text-transform: uppercase;
   }
 
-  /* ── Scroll-triggered reveal ── */
   .js-reveal {
     opacity: 0;
     transform: translateY(28px);
@@ -582,7 +515,6 @@
     transform: translateY(0);
   }
 
-  /* ── Responsive ── */
   @media (max-width: 900px) {
     nav { padding: 1.4rem 2rem; }
     .nav-links { gap: 1.5rem; }
@@ -610,20 +542,18 @@
 </head>
 <body>
 
-<!-- ── Navigation ── -->
 <nav>
   <span class="nav-logo">Eva</span>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#projects">Projects</a></li>
-    <li><a href="#design">Design</a></li>
+    <!-- <li><a href="design.html">Design</a></li> -->
     <li><a href="#education">Education</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
 
-<!-- ── Hero ── -->
 <header class="hero">
   <div class="hero-left">
     <p class="hero-eyebrow">CSE Student - Daffodil International University</p>
@@ -649,11 +579,9 @@
   </div>
 </header>
 
-<!-- ── About ── -->
 <section id="about">
   <div class="section-header js-reveal">
-    <span class="section-num">01 —</span>
-    <h2 class="section-title">About</h2>
+      <h2 class="section-title">About</h2>
     <span class="section-line"></span>
   </div>
 
@@ -703,10 +631,8 @@
   </div>
 </section>
 
-<!-- ── Skills ── -->
 <section id="skills">
   <div class="section-header js-reveal">
-    <span class="section-num">02 —</span>
     <h2 class="section-title">Skills</h2>
     <span class="section-line"></span>
   </div>
@@ -746,11 +672,9 @@
   </div>
 </section>
 
-<!-- ── Projects ── -->
 <section id="projects">
   <div class="section-header js-reveal">
-    <span class="section-num">03 —</span>
-    <h2 class="section-title">Projects</h2>
+     <h2 class="section-title">Projects</h2>
     <span class="section-line"></span>
   </div>
 
@@ -775,7 +699,7 @@
       <span class="project-tech">Backend: Python · Flask · MySQL <br>Frontend: HTML · CSS</span>
       <span class="project-year">2026</span>
     </div>
-    
+
       <div class="project-item js-reveal">
       <div>
         <h3 class="project-name">DIUBusMate <em>System</em></h3>
@@ -789,11 +713,9 @@
   </div>
 </section>
 
-<!-- ── Education ── -->
 <section id="education">
   <div class="section-header js-reveal">
-    <span class="section-num">04 —</span>
-    <h2 class="section-title">Education</h2>
+     <h2 class="section-title">Education</h2>
     <span class="section-line"></span>
   </div>
 
@@ -832,7 +754,6 @@
   </div>
 </section>
 
-<!-- ── Contact ── -->
 <section id="contact">
   <div class="section-header js-reveal">
     <span class="section-num">05 —</span>
@@ -867,14 +788,12 @@
   </div>
 </section>
 
-<!-- ── Footer ── -->
 <footer>
   <span>© 2025 Mosammat Samiea Jahan Eva</span>
   <span>CSE — Daffodil International University</span>
   <span>Dhaka, Bangladesh</span>
 </footer>
 
-<!-- ── Intersection Observer for scroll reveals ── -->
 <script>
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {

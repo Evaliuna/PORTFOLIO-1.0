@@ -441,6 +441,164 @@
     line-height: 1.9;
   }
 
+
+  #certificates { background: var(--cream); }
+   .cert-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px; 
+  }
+ 
+   .cert-card {
+    background: var(--soft);
+    position: relative;
+    overflow: hidden;
+    transition:
+      transform  0.3s cubic-bezier(0.22, 0.8, 0.32, 1),
+      background 0.25s ease,
+      box-shadow 0.3s ease;
+  }
+ 
+  .cert-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 0;
+    background: var(--accent);
+    transition: height 0.35s cubic-bezier(0.22, 0.8, 0.32, 1);
+  }
+ 
+ .cert-card:hover {
+    transform: translateY(-5px);
+    background: #eae5de;
+    box-shadow: 0 8px 24px rgba(26, 23, 20, 0.08);
+  }
+ 
+  .cert-card:hover::before { height: 100%; }
+ 
+   .cert-image {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    background: var(--line);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+ 
+  .cert-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+     transition: transform 0.45s cubic-bezier(0.22, 0.8, 0.32, 1);
+  }
+ 
+  .cert-card:hover .cert-image img { transform: scale(1.03); }
+ 
+   .cert-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: var(--line);
+  }
+ 
+  .cert-placeholder-icon {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    opacity: 0.5;
+  }
+ 
+  .cert-placeholder-label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    opacity: 0.3;
+  }
+ 
+   .cert-badge-soon {
+    position: absolute;
+    top: 0.85rem; right: 0.85rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.52rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    background: var(--cream);
+    color: var(--muted);
+    padding: 0.28rem 0.65rem;
+    border: 1px solid var(--line);
+  }
+ 
+  .cert-body {
+    padding: 1.4rem 1.6rem 1.8rem;
+  }
+ 
+  .cert-category {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.55rem;
+  }
+ 
+  .cert-title {
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 0.3rem;
+    line-height: 1.35;
+  }
+ 
+ .cert-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-top: 0.9rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--line);
+  }
+ 
+  .cert-issuer {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+ 
+  .cert-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+ 
+  .cert-verify {
+    display: inline-block;
+    margin-top: 0.8rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+ 
+  .cert-verify:hover {
+    color: var(--ink);
+    border-color: var(--ink);
+  }
+ 
+
   #contact { background: var(--cream); }
 
   .contact-inner {
@@ -550,6 +708,7 @@
     <li><a href="#projects">Projects</a></li>
     <!-- <li><a href="design.html">Design</a></li> -->
     <li><a href="#education">Education</a></li>
+    <li><a href="#certificates">Certificates</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -573,7 +732,7 @@
 
   <div class="hero-right">
     <div class="hero-art">
-    <img src="images/eva2.png" alt="Eva" class="profile-photo" onerror="this.style.desplay='none'; this.nextElementSibling.style.display='flex';">
+    <img src="images/eva2.png" alt="Eva" class="profile-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
    </div>
     <span class="art-label">Dhaka, Bangladesh</span>
   </div>
@@ -754,10 +913,148 @@
   </div>
 </section>
 
+
+<section id="certificates">
+  <div class="section-header js-reveal">
+     <h2 class="section-title">Certificates</h2>
+    <span class="section-line"></span>
+  </div>
+ 
+  <div class="cert-grid">
+
+     <div class="cert-card js-reveal">
+      <div class="cert-image">
+        <img
+          src="images/certs/takeoff.jpg"
+          alt="Certificate of competition"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+           <div class="cert-placeholder" style="display:none;">
+          <span class="cert-placeholder-icon">[ certificate ]</span>
+            </div>
+      </div>
+      <div class="cert-body">
+    <p class="cert-category">Competitive Programming</p>
+
+    <h3 class="cert-title">
+        Takeoff Program Completion
+    </h3>
+
+    <div class="cert-meta">
+        <span class="cert-issuer">
+            Daffodil International University
+        </span>
+
+        <span class="cert-date">2024</span>
+    </div>
+        <a href="#" class="cert-verify" style="display:none;">Verify credential →</a>
+      </div>
+    </div>
+
+     <div class="cert-card js-reveal">
+      <div class="cert-image">
+        <img
+          src="images/certs/prompt.jpg"
+          alt="Certificate of completion"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="cert-placeholder" style="display:none;">
+             </div>
+      </div>
+      <div class="cert-body">
+        <p class="cert-category">Prompt Battle</p>
+        <h3 class="cert-title">Prompt Engineering Contest</h3>
+        <div class="cert-meta">
+          <span class="cert-issuer">Daffodil International University</span>
+          <span class="cert-date">2025</span>
+        </div>
+        <a href="#" class="cert-verify" style="display:none;">Verify credential →</a>
+      </div>
+    </div>
+
+     <div class="cert-card js-reveal">
+      <div class="cert-image">
+        <img
+          src="images/certs/googling.jpg"
+          alt="Certificate of completion"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="cert-placeholder" style="display:none;">
+        </div>
+      </div>
+      <div class="cert-body">
+        <p class="cert-category">Googling</p>
+        <h3 class="cert-title">Googling Contest</h3>
+        <div class="cert-meta">
+          <span class="cert-issuer">Daffodil International University</span>
+          <span class="cert-date">2024</span>
+        </div>
+        <a href="#" class="cert-verify" style="display:none;">Verify credential →</a>
+      </div>
+    </div>
+
+    <div class="cert-card js-reveal">
+      <div class="cert-image">
+        <img
+          src="images/certs/git.jpg"
+          alt="Certificate of completion"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="cert-placeholder" style="display:none;">
+        </div>
+      </div>
+      <div class="cert-body">
+        <p class="cert-category">Version Control</p>
+        <h3 class="cert-title">Git Training</h3>
+        <div class="cert-meta">
+          <span class="cert-issuer">Simplilearn</span>
+          <span class="cert-date">2025</span>
+        </div>
+        <a href="#" class="cert-verify" style="display:none;">Verify credential →</a>
+      </div>
+    </div>
+
+    <div class="cert-card js-reveal">
+      <div class="cert-image">
+        <img
+          src="images/certs/robotics.jpg"
+          alt="Certificate of completion"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="cert-placeholder" style="display:none;">
+        </div>
+      </div>
+      <div class="cert-body">
+        <p class="cert-category">Robotics</p>
+        <h3 class="cert-title">Robotics Camp </h3>
+        <div class="cert-meta">
+          <span class="cert-issuer">Roboment</span>
+          <span class="cert-date">2023</span>
+        </div>
+        <a href="#" class="cert-verify" style="display:none;">Verify credential →</a>
+      </div>
+    </div>
+
+     <div class="cert-card js-reveal">
+      <div class="cert-image">
+        <img
+          src="images/certs/seminer1.jpg"
+          alt="Certificate of completion"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="cert-placeholder" style="display:none;">
+        </div>
+      </div>
+      <div class="cert-body">
+        <p class="cert-category">Leadership</p>
+        <h3 class="cert-title">Empowering Future Leaders</h3>
+        <div class="cert-meta">
+          <span class="cert-issuer">Career Development Center</span>
+          <span class="cert-date">2025</span>
+        </div>
+        <a href="#" class="cert-verify" style="display:none;">Verify credential →</a>
+      </div>
+    </div>
+     </div>
+</section>
+
 <section id="contact">
   <div class="section-header js-reveal">
-    <span class="section-num">05 —</span>
-    <h2 class="section-title">Contact</h2>
+   <h2 class="section-title">Contact</h2>
     <span class="section-line"></span>
   </div>
 

@@ -73,4 +73,5 @@ Through building this project, I improved my understanding of:
 GitHub: https://github.com/Evaliuna
 
 ---
-## 🔗 Live Preview
+## 🔗 Live Preview : https://evaliuna.github.io/PORTFOLIO-1.0/
+
